@@ -58,7 +58,8 @@
     font-style: italic;
 }
 
-#perm_owner_change_button {
-    padding: 50px;
+#perm_change_owner_button {
+    margin-bottom: 10px;
+    float: right;
 }
 
