@@ -3,12 +3,14 @@ show_starter_dialogs = false // set this to "false" to disable the survey and 3-
 
 // ---- Set up main Permissions dialog ----
 
+//validate_and_get_logs()
+
 // --- Create all the elements, and connect them as needed: ---
 // Make permissions dialog:
 perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     // The following are standard jquery-ui options. See https://jqueryui.com/dialog/
     height: 500,
-    width: 400,
+    width: 1000,
     buttons: {
         OK:{
             text: "OK",
@@ -27,6 +29,11 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     }
 })
 
+
+
+
+
+
 // Make the initial "Object Name:" text:
 // If you pass in valid HTML to $(), it will *create* elements instead of selecting them. (You still have to append them, though)
 obj_name_div = $('<div id="permdialog_objname" class="section">Object Name: <span id="permdialog_objname_namespan"></span> </div>')
@@ -44,7 +51,8 @@ file_permission_users = define_single_select_list('permdialog_file_user_list', f
     grouped_permissions.attr('username', selected_user)
 })
 file_permission_users.css({
-    'height':'80px',
+    'height':'200px',
+    
 })
 
 // Make button to add a new user to the list:
@@ -144,14 +152,160 @@ perm_remove_user_button.click(function(){
 })
 
 
+// James:
+// - Creates a new panel for changing the owner
+// - inside the click(), it uses the code from below that changes the owner interally
+// - also made the button id match whatever it was originally in the HTML (~ line 156) so that the JQuery
+//   selectors that I took from below match it. However, this HTML element is now created dynamically
+//   in this function instead.
+let change_owner_dialog = define_new_dialog('change_owner_dialog', 'Change Owner', {
+    height: 250,
+    width: 500,
+    buttons: {
+        Confirm: {
+            text: "Confirm",
+            id: "adv_owner_change_button", 
+            click: function() {
+                
+                console.log('changing owner...');
+
+                // James
+                // - from below, gets the current owner and changes the label to match it
+                // - same chunk of code is below, but this one changes the label on click
+                //   rather than when the panel first opens
+                let selected_username = $('#adv_owner_change_button').attr('username')
+                let filepath = $('#change_owner_dialog').attr('filepath')
+                let file_obj = path_to_file[filepath]
+                if (selected_username && (selected_username.length > 0) && (selected_username in all_users) ) {
+                    file_obj.owner = all_users[selected_username]
+                    $('#adv_owner_current_owner').text(selected_username)
+                    emitState() // Log new state
+                }
+                ////
+
+                change_owner_dialog.dialog('close');
+            },
+        }
+        
+    }
+})
+
+
+
+// James:
+// - Creates the label, italicized username, and list of users on the Change Owner panel
+//   and adds them dynamically
+current_owner_text = $('<span id="adv_owner_current_owner_text">Current Owner: </span>')
+current_owner_username = $('<span id="adv_owner_current_owner"></span>')
+owner_list = $('<div id="adv_owner_user_list"></div>')
+
+// James:
+// - Creates the main 'Change Owner' button that opens up the panel
+perm_change_owner_button  = $('<button id="perm_change_owner_button" class="ui-button ui-widget ui-corner-all">Change Owner</button>')
+perm_change_owner_button.click( () => {
+
+    // open the dialog
+    change_owner_dialog.dialog('open');
+
+    // empty the list at first
+    $('#adv_owner_user_list').empty();
+
+    //get the file path (the file path can always be accessed this way)
+    let filepath = perm_dialog.attr('filepath');
+    let file_obj = path_to_file[filepath]
+
+    // James: 
+    // - everything else here is moved from below
+    // gets users with access to file and appends the HTML elements to the list
+    let users = get_file_users(file_obj)
+    for(let u in users) {
+        let grouped_perms = get_grouped_permissions(file_obj, u)
+        for(let ace_type in grouped_perms) {
+            for(let perm in grouped_perms[ace_type]) {
+                $('#adv_perm_table').append(`<tr id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}">
+                    <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_type">${ace_type}</td>
+                    <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_name">${u}</td>
+                    <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_permission">${perm}</td>
+                    <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_type">${grouped_perms[ace_type][perm].inherited?"Parent Object":"(not inherited)"}</td>
+                </tr>`)
+            }
+        }
+    }
+
+    
+    //console.log(users)
+
+    // James:
+    // - also from below, but this essentially grabs who the owner is and puts it into the
+    //   <span> that we created above (~line 195). The same code block is used above but that
+    //   one is used to change the name whereas this one just gets it initially when the panel opens
+    let selected_username = $('#adv_owner_current_owner').attr('username')
+    if (selected_username && (selected_username.length > 0) && (selected_username in all_users) ) {
+        file_obj.owner = all_users[selected_username]
+        $('#adv_owner_current_owner').text(selected_username)
+        emitState() // Log new state
+    }
+
+    // user list for owner tab:
+    let all_user_list = make_all_users_list('adv_owner_','adv_owner_current_owner') 
+    $('#adv_owner_current_owner').text(get_user_name(file_obj.owner))
+    $('#adv_owner_user_list').append(all_user_list)
+
+})
+
+
+// James:
+// - now we append the dynamically created elements to the dialog panel
+change_owner_dialog.append(current_owner_text);
+change_owner_dialog.append(current_owner_username);
+change_owner_dialog.append(owner_list);
+
+
+
+
+
+/* APPPENDING TO COLUMNS 1 AND 2 */
+
+// James:
+// - this is just CSS grid stuff, just splits the panel
+//   into two columns now, named accordingly
+grid_div = $('<div class="grid"></div>')
+
+//create columns and append to the div
+col1 = $('<div id="col1"></div>')
+col2 = $('<div id="col2"></div>')
+grid_div.append(col1)
+grid_div.append(col2)
+
+// put stuff in 1st column, one at a time
+col1.append(obj_name_div)
+col1.append($('<div id="permissions_user_title">Group or user names:</div>'))
+col1.append(file_permission_users);
+col1.append(perm_add_user_select);
+perm_add_user_select.append(perm_remove_user_button)
+
+// put stuff in 2nd column
+col2.append(perm_change_owner_button)
+col2.append(grouped_permissions)
+col2.append(advanced_expl_div)
+
+
+//finally put the finished grid on the panel
+perm_dialog.append(grid_div);
+
+
+/* ************************************** */
+
+
+// James: CODE FROM BEFORE, NO LONGER NEEDED
 // --- Append all the elements to the permissions dialog in the right order: --- 
-perm_dialog.append(obj_name_div)
-perm_dialog.append($('<div id="permissions_user_title">Group or user names:</div>'))
-perm_dialog.append(file_permission_users)
-perm_dialog.append(perm_add_user_select)
-perm_add_user_select.append(perm_remove_user_button) // Cheating a bit again - add the remove button the the 'add user select' div, just so it shows up on the same line.
-perm_dialog.append(grouped_permissions)
-perm_dialog.append(advanced_expl_div)
+//perm_dialog.append(obj_name_div)
+
+//perm_dialog.append($('<div id="permissions_user_title">Group or user names:</div>'))
+//perm_dialog.append(file_permission_users)
+//perm_dialog.append(perm_add_user_select)
+//perm_add_user_select.append(perm_remove_user_button) // Cheating a bit again - add the remove button the the 'add user select' div, just so it shows up on the same line.
+
 
 // --- Additional logic for reloading contents when needed: ---
 //Define an observer which will propagate perm_dialog's filepath attribute to all the relevant elements, whenever it changes:
@@ -455,7 +609,10 @@ effective_user_observer = new MutationObserver(function(mutationsList, observer)
 
 effective_user_observer.observe(document.getElementById('adv_effective_current_user'), {attributes: true})
 
+// CHANGE OWNER FUNCTION
+// MOVED ABOVE TO THE Confirm BUTTON onClick function
 // change owner button:
+/*
 $('#adv_owner_change_button').click(function() {
     let selected_username = $('#adv_owner_current_owner').attr('username')
     let filepath = $('#advdialog').attr('filepath')
@@ -466,7 +623,7 @@ $('#adv_owner_change_button').click(function() {
         emitState() // Log new state
     }
 })
-
+*/
 
 
 // User dialog 
