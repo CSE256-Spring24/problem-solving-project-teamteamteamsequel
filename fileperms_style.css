@@ -63,3 +63,18 @@
     float: right;
 }
 
+
+/* added by Jason for dropdown menu advanced permissions */
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+  }
+  
+  
+  
+.show {display: block;}

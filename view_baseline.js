@@ -19,13 +19,13 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
                 $( this ).dialog( "close" );
             }
         },
-        Advanced: {
-            text: "Advanced",
-            id: "perm-dialog-advanced-button",
-            click: function() {
-                open_advanced_dialog(perm_dialog.attr('filepath'))
-            }
-        }
+        // Advanced: {
+        //     text: "Advanced",
+        //     id: "perm-dialog-advanced-button",
+        //     click: function() {
+        //         open_advanced_dialog(perm_dialog.attr('filepath'))
+        //     }
+        // }
     }
 })
 
@@ -203,6 +203,7 @@ owner_list = $('<div id="adv_owner_user_list"></div>')
 // - Creates the main 'Change Owner' button that opens up the panel
 perm_change_owner_button  = $('<button id="perm_change_owner_button" class="ui-button ui-widget ui-corner-all">Change Owner</button>')
 perm_change_owner_button.click( () => {
+    console.log("oopenediasjdfjdsjflkj");
 
     // open the dialog
     change_owner_dialog.dialog('open');
@@ -274,6 +275,7 @@ grid_div = $('<div class="grid"></div>')
 //create columns and append to the div
 col1 = $('<div id="col1"></div>')
 col2 = $('<div id="col2"></div>')
+
 grid_div.append(col1)
 grid_div.append(col2)
 
@@ -288,6 +290,64 @@ perm_add_user_select.append(perm_remove_user_button)
 col2.append(perm_change_owner_button)
 col2.append(grouped_permissions)
 col2.append(advanced_expl_div)
+adv_perm_panel = $('<div id="advpermpanel" class="dropdown-content"><br></div>')
+adv_perm_panel.append($('#adv_permissions_tab'));
+col2.append(adv_perm_panel);
+// col2.append($('#adv_permissions_tab'));
+col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced</button></div>'))
+// let file_obj = path_to_file[file_path]
+
+function myFunction() {
+    
+    document.getElementById("advpermpanel").classList.toggle("show");
+    open_advanced_dialog(perm_dialog.attr('filepath'))
+    // console.log("aldsfjashlfdjd");
+  
+  }
+
+// // set file path in UI:
+// $('#adv_perm_filepath').text(file_path);
+// $('#adv_owner_filepath').text(file_path);
+// $('#adv_effective_filepath').text(file_path);
+// $('#advdialog').attr('filepath', file_path);
+
+// // clear dynamic content:
+// $('#adv_perm_table tr:gt(0)').remove()
+// $('#adv_owner_user_list').empty()
+// $(`.effectivecheckcell`).empty()
+
+// if(file_obj.using_permission_inheritance) {
+//     $('#adv_perm_inheritance').prop('checked', true)
+// }
+// else {
+//     $('#adv_perm_inheritance').prop('checked', false)
+// }
+
+
+
+// // permissions list for permissions tab:
+// let users = get_file_users(file_obj)
+// for(let u in users) {
+//     let grouped_perms = get_grouped_permissions(file_obj, u)
+//     for(let ace_type in grouped_perms) {
+//         for(let perm in grouped_perms[ace_type]) {
+//             $('#adv_perm_table').append(`<tr id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}">
+//                 <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_type">${ace_type}</td>
+//                 <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_name">${u}</td>
+//                 <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_permission">${perm}</td>
+//                 <td id="adv_perm_${file_obj.filename}__${u}_${ace_type}_${perm}_type">${grouped_perms[ace_type][perm].inherited?"Parent Object":"(not inherited)"}</td>
+//             </tr>`)
+//         }
+//     }
+// }
+
+// // user list for owner tab:
+// let all_user_list = make_all_users_list('adv_owner_','adv_owner_current_owner') 
+
+// $('#adv_owner_current_owner').text(get_user_name(file_obj.owner))
+
+// $('#adv_owner_user_list').append(all_user_list)
+
 
 
 //finally put the finished grid on the panel
@@ -416,8 +476,8 @@ function open_advanced_dialog(file_path) {
 
     $('#adv_owner_user_list').append(all_user_list)
 
-    // open dialog:
-    $(`#advdialog`).dialog('open')
+    // open dialog: (commented out by jason)
+    // $(`#advdialog`).dialog('open')
 }
 
 // Update Effective User display
