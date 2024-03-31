@@ -65,3 +65,13 @@
 }
 
 
+
+#permissions_user_description{
+    color: #707070;
+    margin-top: 7px;
+    font-style: italic;
+}
+
+#permissions_user_title{
+    font-weight: 600;
+}

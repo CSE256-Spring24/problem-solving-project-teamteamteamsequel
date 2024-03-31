@@ -1,6 +1,8 @@
 // Configuration
 show_starter_dialogs = false // set this to "false" to disable the survey and 3-minute timer. Set to "true" before submitting to MTurk!!
 
+
+
 // ---- Set up main Permissions dialog ----
 
 //validate_and_get_logs()
@@ -10,7 +12,7 @@ show_starter_dialogs = false // set this to "false" to disable the survey and 3-
 perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     // The following are standard jquery-ui options. See https://jqueryui.com/dialog/
     height: 500,
-    width: 1000,
+    width: 800,
     buttons: {
         OK:{
             text: "OK",
@@ -68,7 +70,9 @@ $(document).ready(function(){
     advanced_drop_down.css({
     
     })
-       
+
+
+
 
 // Make the (grouped) permission checkboxes table:
 grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
@@ -308,16 +312,22 @@ grid_div.append(col2)
 
 // put stuff in 1st column, one at a time
 col1.append(obj_name_div)
-col1.append($('<div id="permissions_user_title">Group or user names:</div>'))
+col1.append($('<div id="permissions_user_title">Groups and Users</div>'))
+col1.append($('<div id="permissions_user_description">Click on the name to view and edit their permissions to the right</div>'))
 col1.append(file_permission_users);
 col1.append(perm_add_user_select);
 perm_add_user_select.append(perm_remove_user_button)
 
+
 // put stuff in 2nd column
+
 col2.append(perm_change_owner_button)
+//col2.append($('<div id="permissions_description">View what permissions the user has below. Click on allow or deny to change existing permissions</div>'))
 col2.append(grouped_permissions)
 col2.append(advanced_expl_div)
 col2.append(advanced_drop_down)
+
+
 
 
 //finally put the finished grid on the panel

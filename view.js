@@ -46,6 +46,7 @@ for(let root_file of root_files) {
 
 
 
+
 // make folder hierarchy into an accordion structure
 $('.folder').accordion({
     collapsible: true,
