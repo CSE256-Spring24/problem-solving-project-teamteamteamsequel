@@ -41,6 +41,35 @@ obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span 
 //Make the div with the explanation about special permissions/advanced settings:
 advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions or advanced settings, click Advanced.</div>')
 
+//MORGAN'S ATTEMPT AT ADVANCED DROP DOWN! -----------------------------------
+advanced_drop_down = $('<div class="faq-text"><div class="textbox"><div class="nadpis"><h2>Advanced Permissions</h2><div class="off"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div></div><p>text.</p></div></div>')
+
+//_________making it drop down
+
+$(document).ready(function(){
+
+
+    var nadpis = $('.nadpis');
+        
+    
+    nadpis.on('click', function () {
+    
+        $(this).siblings().slideToggle()
+    
+        $(this).children().toggleClass("off on")
+    
+     nadpis.not(this).siblings().slideUp();
+    
+    
+    });
+    
+    });
+
+    advanced_drop_down.css({
+    
+    })
+       
+
 // Make the (grouped) permission checkboxes table:
 grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
 grouped_permissions.addClass('section') // add a 'section' class to the grouped_permissions element. This class adds a bit of spacing between this element and the next.
@@ -288,6 +317,7 @@ perm_add_user_select.append(perm_remove_user_button)
 col2.append(perm_change_owner_button)
 col2.append(grouped_permissions)
 col2.append(advanced_expl_div)
+col2.append(advanced_drop_down)
 
 
 //finally put the finished grid on the panel
@@ -325,6 +355,8 @@ define_attribute_observer(perm_dialog, 'filepath', function(){
 })
 
 
+
+    
 
 // ---- Old code which doesn't use the helper functions starts here ----
 
