@@ -293,14 +293,24 @@ col2.append(advanced_expl_div)
 adv_perm_panel = $('<div id="advpermpanel" class="dropdown-content"><br></div>')
 adv_perm_panel.append($('#adv_permissions_tab'));
 col2.append(adv_perm_panel);
+// console.log('anskdsajldhj');
+console.log($('#adv_permissions_tab').attr("display"));
+// 
 // col2.append($('#adv_permissions_tab'));
 col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced</button></div>'))
+
+// ocument.getElementById("advpermpanel").classList.toggle("hide");
+
 // let file_obj = path_to_file[file_path]
 
+// createdADV helps track if the dropdown is open. For some reason, it doesn't reset when changing files. Therefore, code has been added to the
+// filepath observer so that every time a new file is clicked on, this also resets.
+let createdADV = false;
 function myFunction() {
     
     document.getElementById("advpermpanel").classList.toggle("show");
     open_advanced_dialog(perm_dialog.attr('filepath'))
+    createdADV = true;
     // console.log("aldsfjashlfdjd");
   
   }
@@ -382,6 +392,14 @@ define_attribute_observer(perm_dialog, 'filepath', function(){
     //replace previous user list with the one we just generated:
     file_permission_users.empty()
     file_permission_users.append(file_user_list)
+
+    // ADDED BY JASON
+    // Created so that the dropdown menu of advanced would reset every time (for some reason it doesn't normally do this.)
+    console.log("file changed")
+    if(createdADV){
+        document.getElementById("advpermpanel").classList.toggle("show");
+        createdADV = false;
+    }
 })
 
 
