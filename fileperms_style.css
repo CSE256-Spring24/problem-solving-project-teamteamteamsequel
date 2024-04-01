@@ -68,6 +68,8 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 10px;
   }
   
 .dropdown-content {
@@ -97,3 +99,7 @@
    margin-top: -38px;
 }
 
+
+#adv_perm_entries_text{
+    margin-top: 35px;
+}
