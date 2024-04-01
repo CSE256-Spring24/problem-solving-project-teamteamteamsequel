@@ -29,10 +29,9 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     }
 })
 
-
-
-
-
+//** GLOBAL VARIABLES **/ 
+// this is updated whenever the user picks their chosen user
+let selectedUser;
 
 // Make the initial "Object Name:" text:
 // If you pass in valid HTML to $(), it will *create* elements instead of selecting them. (You still have to append them, though)
@@ -51,6 +50,8 @@ grouped_permissions.addClass('section') // add a 'section' class to the grouped_
 file_permission_users = define_single_select_list('permdialog_file_user_list', function(selected_user, e, ui){
     // when a new user is selected, change username attribute of grouped permissions:
     grouped_permissions.attr('username', selected_user)
+    console.log("this is the init selected user " + selected_user) 
+    selectedUser = selected_user;
 })
 file_permission_users.css({
     'height':'200px',
@@ -171,7 +172,7 @@ let change_owner_dialog = define_new_dialog('change_owner_dialog', 'Change Owner
             id: "adv_owner_change_button", 
             click: function() {
                 
-                console.log('changing owner...');
+                // console.log('changing owner...');
 
                 // James
                 // - from below, gets the current owner and changes the label to match it
@@ -207,7 +208,7 @@ owner_list = $('<div id="adv_owner_user_list"></div>')
 // - Creates the main 'Change Owner' button that opens up the panel
 perm_change_owner_button  = $('<button id="perm_change_owner_button" class="ui-button ui-widget ui-corner-all">Change Owner</button>')
 perm_change_owner_button.click( () => {
-    console.log("oopenediasjdfjdsjflkj");
+    // console.log("oopenediasjdfjdsjflkj");
 
     // open the dialog
     change_owner_dialog.dialog('open');
@@ -458,6 +459,9 @@ function open_permission_entry(file_path) {
 
 // populate and open the "advanced" dialog for a given file
 function open_advanced_dialog(file_path) {
+
+    console.log("this is the open advanced dialog with a file path of " + file_path)
+
     let file_obj = path_to_file[file_path]
 
     // set file path in UI:
@@ -758,8 +762,10 @@ let perm_entry_dialog = $('#permentry').dialog({
             text: "OK",
             id: "permission-entry-ok-button",
             click: function() {
-                open_advanced_dialog($('#advdialog').attr('filepath') )// redo advanced dialog (recalc permissions)
-                perm_dialog.attr('filepath', filepath) // reload contents of permissions dialog
+                let file_path = perm_dialog.attr('filepath')
+                console.log("perm entry dialog file path" + file_path)
+                open_advanced_dialog(file_path )// redo advanced dialog (recalc permissions)
+                perm_dialog.attr('filepath', file_path) // reload contents of permissions dialog
                 $( this ).dialog( "close" );
             }
         }
@@ -803,7 +809,11 @@ perm_entry_user_observer = new MutationObserver(function(mutationsList, observer
                     $(this).append(checkbox)
                 })
 
-                let all_perms = get_total_permissions(file_obj,$('#perm_entry_username').attr('selected_user'))
+
+                // go to this for the selected user
+                console.log(file_obj)
+                console.log("this is the selected user " + selectedUser)
+                let all_perms = get_total_permissions(file_obj, selectedUser)
                 for(let ace_type in all_perms) {
                     for(let p in all_perms[ace_type]) {
                         let checkbox = $(document.getElementById(`perm_entry_row_${p}_${ace_type}_checkbox`))
@@ -816,7 +826,7 @@ perm_entry_user_observer = new MutationObserver(function(mutationsList, observer
                 }
 
                 $('.perm_entry_checkbox').change(function(){
-                    let username =  $('#perm_entry_username').attr('selected_user')
+                    let username =  selectedUser
                     let filepath =  $(`#advdialog`).attr('filepath')
                     toggle_permission(filepath, username, $(this).parent().attr('perm'), $(this).parent().attr('type'), $(this).prop('checked'))
                 })
