@@ -28,7 +28,7 @@
 }
 
 #col1 {
-    border-right: 3px solid black;
+    border-right: 1px solid rgb(189, 189, 189);
     margin-right: 20px;
     padding-right: 20px;
     
@@ -78,3 +78,17 @@
   
   
 .show {display: block;}
+
+
+
+
+/* added by MORGAN */
+#permissions_user_description{
+    color: #707070;
+    margin-top: 7px;
+    font-style: italic;
+}
+
+#permissions_user_title{
+    font-weight: 600;
+}
