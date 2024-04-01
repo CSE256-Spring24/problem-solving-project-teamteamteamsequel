@@ -39,7 +39,9 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions or advanced settings, click Advanced.</div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, click Advanced to view special permissions.</div>')
+
+permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions.</div>')
 
 // Make the (grouped) permission checkboxes table:
 grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
@@ -55,8 +57,10 @@ file_permission_users.css({
     
 })
 
+
+
 // Make button to add a new user to the list:
-perm_add_user_select = define_new_user_select_field('perm_add_user', 'Add...', on_user_change = function(selected_user){
+perm_add_user_select = define_new_user_select_field('perm_add_user', 'Add User', on_user_change = function(selected_user){
     // console.log("add...")
     let filepath = perm_dialog.attr('filepath')
     if(selected_user && (selected_user.length > 0) && (selected_user in all_users)) { // sanity check that a user is actually selected (and exists)
@@ -286,9 +290,10 @@ col1.append($('<div id="permissions_user_description">Click on the name to view 
 col1.append(file_permission_users);
 col1.append(perm_add_user_select);
 perm_add_user_select.append(perm_remove_user_button)
+col1.append(perm_change_owner_button)
 
 // put stuff in 2nd column
-col2.append(perm_change_owner_button)
+col2.append(permissions_description)
 col2.append(grouped_permissions)
 col2.append(advanced_expl_div)
 adv_perm_panel = $('<div id="advpermpanel" class="dropdown-content"><br></div>')
@@ -299,6 +304,9 @@ console.log($('#adv_permissions_tab').attr("display"));
 // 
 // col2.append($('#adv_permissions_tab'));
 col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced</button></div>'))
+
+
+
 
 // ocument.getElementById("advpermpanel").classList.toggle("hide");
 

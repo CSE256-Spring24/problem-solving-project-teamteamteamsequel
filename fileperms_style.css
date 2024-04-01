@@ -92,3 +92,8 @@
 #permissions_user_title{
     font-weight: 600;
 }
+
+#perm_change_owner_button{
+   margin-top: -38px;
+}
+
