@@ -285,7 +285,7 @@ grid_div.append(col1)
 grid_div.append(col2)
 
 // put stuff in 1st column, one at a time
-col1.append(obj_name_div)
+
 col1.append($('<div id="permissions_user_title">Groups and Users</div>'))
 col1.append($('<div id="permissions_user_description">Click on the name to view and edit their permissions to the right</div>'))
 col1.append(file_permission_users);
@@ -304,7 +304,7 @@ col2.append(adv_perm_panel);
 console.log($('#adv_permissions_tab').attr("display"));
 // 
 // col2.append($('#adv_permissions_tab'));
-col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced</button></div>'))
+col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced Permissions</button></div>'))
 
 
 

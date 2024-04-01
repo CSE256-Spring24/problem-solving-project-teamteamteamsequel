@@ -68,6 +68,8 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 10px;
   }
   
 .dropdown-content {
@@ -92,7 +94,11 @@
 }
 
 #perm_change_owner_button{
-   margin-top: -38px;
+   margin-top: -51px;
+}
+
+#adv_perm_entries_text{
+    margin-top: 35px;
 }
 
 /* added by H Fu */
