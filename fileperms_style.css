@@ -80,8 +80,6 @@
 .show {display: block;}
 
 
-
-
 /* added by MORGAN */
 #permissions_user_description{
     color: #707070;
@@ -97,3 +95,7 @@
    margin-top: -38px;
 }
 
+/* added by H Fu */
+#col1 > *, #col2 > * {
+    margin-bottom: 1em;
+}

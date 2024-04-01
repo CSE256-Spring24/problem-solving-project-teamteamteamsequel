@@ -9,8 +9,8 @@ show_starter_dialogs = false // set this to "false" to disable the survey and 3-
 // Make permissions dialog:
 perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     // The following are standard jquery-ui options. See https://jqueryui.com/dialog/
-    height: 500,
-    width: 1000,
+    height: 700,
+    width: "70%",
     buttons: {
         OK:{
             text: "OK",
