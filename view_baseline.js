@@ -42,7 +42,7 @@ perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, click Advanced to view special permissions.</div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below.</div>')
 
 permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions.</div>')
 
@@ -321,9 +321,13 @@ col2.append(adv_perm_panel);
 
 // 
 // col2.append($('#adv_permissions_tab'));
-col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced Permissions</button></div>'))
 
 
+// Sorry morgan no more button
+//col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced Permissions</button></div>'))
+
+adv_perm_label = $('<div id="adv_perm_label">Advanced Permissions</div>');
+col2.append(adv_perm_label);
 
 
 // ocument.getElementById("advpermpanel").classList.toggle("hide");
@@ -334,6 +338,8 @@ col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropb
 // filepath observer so that every time a new file is clicked on, this also resets.
 let createdADV = false;
 function myFunction() {
+
+    console.log('HERE!');
 
     document.getElementById("advpermpanel").classList.toggle("show");
     open_advanced_dialog(perm_dialog.attr('filepath'))
@@ -423,10 +429,23 @@ define_attribute_observer(perm_dialog, 'filepath', function () {
     // ADDED BY JASON
     // Created so that the dropdown menu of advanced would reset every time (for some reason it doesn't normally do this.)
     console.log("file changed")
+    
+    console.log('HERE BUT 2!');
+
+    // James:
+    // - this function is what fills out the advanced permissions table, so 
+    //   just call it whenever the main GUI is called to show
+    open_advanced_dialog(perm_dialog.attr('filepath'));
+
+
+    //document.getElementById("advpermpanel").classList.toggle("show");
+    
+    /*
     if (createdADV) {
+        console.log('HERE BUT 2!');
         document.getElementById("advpermpanel").classList.toggle("show");
         createdADV = false;
-    }
+    } */
 })
 
 

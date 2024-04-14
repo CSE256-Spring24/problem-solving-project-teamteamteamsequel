@@ -35,6 +35,8 @@
 }
 
 
+
+
 #mturk-top-banner-drop-down-content {
     position: absolute;
     width: 99%;
@@ -73,7 +75,7 @@
   }
   
 .dropdown-content {
-    display: none;
+    /*display: none;*/
     position: absolute;
   }
   
@@ -110,4 +112,13 @@
     color: #707070;
     margin-top: 35px;
     font-style: italic;
+}
+
+
+#adv_perm_label {
+
+    
+    font-size: 24px;
+    font-weight: 600;
+
 }
