@@ -42,9 +42,9 @@ perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below. This includes more specific actions such as DELETE. </div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below. This includes more specific actions such as <span style="color:red"><b>DELETE</b></span>. </div>')
 
-permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions.</div>')
+permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions. <br><b><i>Note: Deny will supersede Allow if both are checked.</i></b></div>')
 
 
 //think about implementing this
