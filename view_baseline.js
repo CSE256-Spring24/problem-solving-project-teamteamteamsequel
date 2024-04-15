@@ -1,6 +1,7 @@
 //** GLOBAL VARIABLES **/ 
 // this is updated whenever the user picks their chosen user
 let selectedUser;
+let globalFilePath;
 
 // Configuration
 show_starter_dialogs = false // set this to "false" to disable the survey and 3-minute timer. Set to "true" before submitting to MTurk!!
@@ -238,6 +239,8 @@ perm_change_owner_button.click(() => {
     let filepath = perm_dialog.attr('filepath');
     let file_obj = path_to_file[filepath]
 
+    globalFilePath = filepath
+
     // James: 
     // - everything else here is moved from below
     // gets users with access to file and appends the HTML elements to the list
@@ -290,6 +293,19 @@ change_owner_dialog.append(owner_list);
 
 /* APPPENDING TO COLUMNS 1 AND 2 */
 
+// initiniallizing the advanced permissions
+for (let p of Object.values(permissions)) {
+    console.log("perm_entry_dialog open!")
+
+    let row = $(`<tr id="perm_entry_row_${p}">
+        <td id="perm_entry_row_${p}_cell">${p}</td>
+    </tr>`)
+    for (let ace_type of ['allow', 'deny']) {
+        row.append(`<td id="perm_entry_row_${p}_${ace_type}" class="perm_entry_checkcell" perm="${p}" type="${ace_type}"></td>`)
+    }
+    $('#perm_entry_table').append(row)
+}
+
 // James:
 // - this is just CSS grid stuff, just splits the panel
 //   into two columns now, named accordingly
@@ -315,6 +331,13 @@ col1.append(perm_change_owner_button)
 col2.append(permissions_description)
 col2.append(grouped_permissions)
 col2.append(advanced_expl_div)
+
+// DEALS WITH PARENT PERMISSIONS
+adv_perm_section = $('#perm_entry_table')
+col2.append(adv_perm_section);
+//open_permission_entry(globalFilePath)
+
+// DEALS WITH INHERITANCE
 adv_perm_panel = $('<div id="advpermpanel" class="dropdown-content"><br></div>')
 adv_perm_panel.append($('#adv_permissions_tab'));
 col2.append(adv_perm_panel);
@@ -494,7 +517,7 @@ function open_permission_entry(file_path) {
 
     $('.perm_entry_checkcell').empty()
 
-    $(`#permentry`).dialog('open')
+    // $(`#permentry`).dialog('open')
 
 
     //NEED TO DEBUG THIS BUT IT SHOULD PULL UP THE PATHS WHEN THE USER CLICKS ON THE ADVANCED - HFU
@@ -562,7 +585,7 @@ function open_advanced_dialog(file_path) {
         $('#adv_perm_inheritance').prop('checked', false)
     }
 
-
+    open_permission_entry(file_path)
 
     // permissions list for permissions tab:
     let users = get_file_users(file_obj)
@@ -833,7 +856,6 @@ let user_select_contents = $("#user_select_dialog").dialog({
 
 
 // this is the advanced perms --- where is this called?
-
 let perm_entry_dialog = $('#permentry').dialog({
     modal: true,
     autoOpen: false,
@@ -846,6 +868,7 @@ let perm_entry_dialog = $('#permentry').dialog({
             text: "OK",
             id: "permission-entry-ok-button",
             click: function () {
+                // SAVES ADVANCED PERM
                 let file_path = perm_dialog.attr('filepath')
                 console.log("perm entry dialog file path" + file_path)
                 open_advanced_dialog(file_path)// redo advanced dialog (recalc permissions)
@@ -856,18 +879,18 @@ let perm_entry_dialog = $('#permentry').dialog({
     }
 })
 
-// initiniallizing the advanced permissions
-for (let p of Object.values(permissions)) {
-    console.log("perm_entry_dialog open!")
+// // initiniallizing the advanced permissions
+// for (let p of Object.values(permissions)) {
+//     console.log("perm_entry_dialog open!")
 
-    let row = $(`<tr id="perm_entry_row_${p}">
-        <td id="perm_entry_row_${p}_cell">${p}</td>
-    </tr>`)
-    for (let ace_type of ['allow', 'deny']) {
-        row.append(`<td id="perm_entry_row_${p}_${ace_type}" class="perm_entry_checkcell" perm="${p}" type="${ace_type}"></td>`)
-    }
-    $('#perm_entry_table').append(row)
-}
+//     let row = $(`<tr id="perm_entry_row_${p}">
+//         <td id="perm_entry_row_${p}_cell">${p}</td>
+//     </tr>`)
+//     for (let ace_type of ['allow', 'deny']) {
+//         row.append(`<td id="perm_entry_row_${p}_${ace_type}" class="perm_entry_checkcell" perm="${p}" type="${ace_type}"></td>`)
+//     }
+//     $('#perm_entry_table').append(row)
+// }
 
 // click event to open the advanced permissions
 $('#adv_perm_edit').click(function () {
