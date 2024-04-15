@@ -20,11 +20,8 @@
 
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;  
+    display: flex;
+    gap: 20px; 
 }
 
 #col1 {
@@ -59,8 +56,11 @@
 }
 
 #perm_change_owner_button {
-    margin-bottom: 10px;
-    float: right;
+    margin-top: 160px;
+    display: block;
+    border: none;
+    text-decoration: underline;
+    padding: 6;
 }
 
 
@@ -93,9 +93,7 @@
     font-weight: 600;
 }
 
-#perm_change_owner_button{
-   margin-top: -51px;
-}
+
 
 #adv_perm_entries_text{
     margin-top: 35px;
@@ -106,8 +104,18 @@
     margin-bottom: 1em;
 }
 
+#col1{
+    width: 30%;
+}
+
+#col2{
+    width: 70%;
+}
+
 #permissions_description_here{
     color: #707070;
     margin-top: 35px;
     font-style: italic;
 }
+
+

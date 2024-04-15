@@ -14,7 +14,7 @@ show_starter_dialogs = false // set this to "false" to disable the survey and 3-
 perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
     // The following are standard jquery-ui options. See https://jqueryui.com/dialog/
     height: 700,
-    width: "70%",
+    width: "55%",
     buttons: {
         OK: {
             text: "OK",
@@ -66,6 +66,7 @@ file_permission_users.css({
 
 })
 
+
 $('#col2').click(() => {
     if (selectedUser === '') {
 
@@ -89,6 +90,8 @@ perm_add_user_select = define_new_user_select_field('perm_add_user', 'Add User',
     }
 })
 perm_add_user_select.find('span').hide()// Cheating a bit - just show the button from the user select; hide the part that displays the username.
+
+
 
 
 // -- Make button to remove currently-selected user; also make some dialogs that may pop up when user clicks this. --
@@ -315,6 +318,7 @@ col2.append(advanced_expl_div)
 adv_perm_panel = $('<div id="advpermpanel" class="dropdown-content"><br></div>')
 adv_perm_panel.append($('#adv_permissions_tab'));
 col2.append(adv_perm_panel);
+
 // console.log('anskdsajldhj');
 //console.log($('#adv_permissions_tab').attr("display"));
 
