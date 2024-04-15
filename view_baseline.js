@@ -22,6 +22,11 @@ perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
             id: "perm-dialog-ok-button",
             click: function () {
                 // clear the global variable when the panel closes (NEED A CHECK FOR WHEN THE USER CLOSES THE X)
+                let file_path = perm_dialog.attr('filepath')
+                console.log("perm entry dialog file path" + file_path)
+                open_advanced_dialog(file_path)// redo advanced dialog (recalc permissions)
+                perm_dialog.attr('filepath', file_path) // reload contents of permissions dialog
+                //$(this).dialog("close");
                 selectedUser = '';
                 $(this).dialog("close");
             }
