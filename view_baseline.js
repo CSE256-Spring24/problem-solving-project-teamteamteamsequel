@@ -42,7 +42,7 @@ perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below.</div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below. This includes more specific actions such as DELETE. </div>')
 
 permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions.</div>')
 
@@ -330,8 +330,7 @@ col2.append(adv_perm_panel);
 // Sorry morgan no more button
 //col2.append($('<div class="dropdown"><button onclick="myFunction()" class="dropbtn">Advanced Permissions</button></div>'))
 
-adv_perm_label = $('<div id="adv_perm_label">Advanced Permissions</div>');
-col2.append(adv_perm_label);
+
 
 
 // ocument.getElementById("advpermpanel").classList.toggle("hide");

@@ -31,6 +31,10 @@
     
 }
 
+#adv_perm_inheritance_div{
+    margin-top: 20px;
+}
+
 
 
 
@@ -93,6 +97,8 @@
 
 #permissions_user_title{
     font-weight: 600;
+    font-size: 20px;
+    margin-top: 20px;
 }
 
 
@@ -116,19 +122,17 @@
 
 #permissions_description_here{
     color: #707070;
-    margin-top: 35px;
+    margin-top: 78px;
     font-style: italic;
 }
 
 
 
 
-
-
-#adv_perm_label {
-
+#adv_perm_edit{
     
-    font-size: 24px;
-    font-weight: 600;
+}
 
+#adv_permissions_tab{
+    margin-top: -15px;
 }
