@@ -1,6 +1,14 @@
+#filestructure {
+    width: 80% !important;
+    margin: auto !important;
+}
+
 .file {
     padding: 8;
     border-bottom: 1px solid #dddddd;
+    /* margin-bottom: 1em; */
+    padding-bottom: 1em;
+    padding-top: 1em;
 }
 
 .section {
@@ -127,12 +135,27 @@
 }
 
 
-
-
 #adv_perm_edit{
     
 }
 
 #adv_permissions_tab{
     margin-top: -15px;
+}
+
+.permbutton {
+    margin-left: 1em;
+    display: inline-flex;
+}
+
+.permbutton > * {
+    padding: .1em;
+}
+
+/* .permbutton:first-child {
+    margin-left: 1em;
+} */
+
+.perm-btn-txt {
+    margin-left: .5em;
 }
