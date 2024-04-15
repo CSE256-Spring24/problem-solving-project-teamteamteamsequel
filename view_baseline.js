@@ -305,7 +305,8 @@ grid_div.append(col2)
 // put stuff in 1st column, one at a time
 
 col1.append($('<div id="permissions_user_title">Groups and Users</div>'))
-col1.append($('<div id="permissions_user_description">Click on the name to view and edit their permissions to the right</div>'))
+col1.append($(
+    '<div id="permissions_user_description">Select a user below to:</div><ul id="user-description"><li><strong>View and edit</strong> their permissions to the right</li><li><strong>Remove</strong> a users permission</li></ul>'))
 col1.append(file_permission_users);
 col1.append(perm_add_user_select);
 perm_add_user_select.append(perm_remove_user_button)
