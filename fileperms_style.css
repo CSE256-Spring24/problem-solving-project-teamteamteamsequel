@@ -43,9 +43,6 @@
     margin-top: 20px;
 }
 
-
-
-
 #mturk-top-banner-drop-down-content {
     position: absolute;
     width: 99%;
@@ -97,7 +94,7 @@
 
 
 /* added by MORGAN */
-#permissions_user_description{
+#permissions_user_description, .small-note{
     color: #6f6f6f;
     margin-top: 7px;
     margin-bottom: .3em !important;
@@ -139,7 +136,7 @@
 #permissions_description_here{
     color: #707070;
     margin-top: 1em;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 
