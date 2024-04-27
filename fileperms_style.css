@@ -131,10 +131,12 @@
 
 #col1{
     width: 30%;
+    background-color: rgb(245, 245, 245);
 }
 
 #col2{
     width: 70%;
+    margin-top: 40px;
 }
 
 #permissions_description_here{
@@ -168,4 +170,9 @@
 
 #permdialog_file_user_list > * {
     padding: .5em;
+}
+
+.small-note{
+    font-size: 15px;
+    margin-bottom: 30px;
 }

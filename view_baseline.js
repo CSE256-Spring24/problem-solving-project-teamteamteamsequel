@@ -42,7 +42,7 @@ perm_dialog = define_new_dialog('permdialog', title = 'Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">File Path: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below. This includes more specific actions such as <span style="color:red"><b>DELETE</b></span>. </div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">If you dont see the permission you are looking for, see Advanced Permissions below. This includes more specific actions such as <span style="color:gray"><b>DELETE</b></span>. </div>')
 
 permissions_description = $('<div id="permissions_description_here">Below are the user or group permissions. Click deny or allow to change permissions. <div class="small-note"><strong>Note:</strong> Deny will supersede Allow if both are checked.</div></div>')
 
@@ -306,7 +306,7 @@ grid_div.append(col2)
 
 col1.append($('<div id="permissions_user_title">Groups and Users</div>'))
 col1.append($(
-    '<div id="permissions_user_description">You must select a user below to:</div><ul id="user-description"><li><strong>View and edit</strong> their permissions to the right</li><li><strong>Remove</strong> a users permission</li></ul>'))
+    '<div id="permissions_user_description">Click on a user below to <strong>view, edit, and remove their permissions</strong> on the right </ul>'))
 col1.append(file_permission_users);
 col1.append(perm_add_user_select);
 perm_add_user_select.append(perm_remove_user_button)
