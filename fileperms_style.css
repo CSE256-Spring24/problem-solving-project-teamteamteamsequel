@@ -14,7 +14,7 @@
 
 .section {
     margin-bottom: 5px;
-    margin-top: -20px;
+    
 }
 
 .ui-selected { 
@@ -189,5 +189,5 @@
 }
 
 #adv_effective_user_text{
-    background-color: #ff0000;
+    background-color: #ffffff; 
 }
