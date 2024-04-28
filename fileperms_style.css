@@ -142,6 +142,7 @@
 #permissions_description_here{
     color: #707070;
     margin-top: 1em;
+    font-size: large;
     /* font-style: italic; */
 }
 
@@ -175,4 +176,18 @@
 .small-note{
     font-size: 15px;
     margin-bottom: 30px;
+}
+
+#permentry,
+#user_select_dialog,
+#advdialog {
+    background-color: #ffffff; 
+    padding: 20px;
+}
+#mturk-top-banner-drop-down-content {
+    margin-top: 4px; /* Adjust the margin to move the section down */
+}
+
+#adv_effective_user_text{
+    background-color: #ff0000;
 }
