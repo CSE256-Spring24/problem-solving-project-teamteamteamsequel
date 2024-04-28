@@ -182,7 +182,7 @@
 #user_select_dialog,
 #advdialog {
     background-color: #ffffff; 
-    padding: 20px;
+    padding: 5px;
 }
 #mturk-top-banner-drop-down-content {
     margin-top: 4px; /* Adjust the margin to move the section down */
