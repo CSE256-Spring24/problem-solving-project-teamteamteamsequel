@@ -36,12 +36,12 @@
     gap: 20px; 
 }
 
-#col1 {
+/* #col1 {
     border-right: 1px solid rgb(189, 189, 189);
     margin-right: 20px;
     padding-right: 20px;
     
-}
+} */
 
 #adv_perm_inheritance_div{
     margin-top: 20px;
@@ -131,6 +131,7 @@
 
 #col1{
     width: 30%;
+    padding: 0 1em;
     background-color: rgb(245, 245, 245);
 }
 
